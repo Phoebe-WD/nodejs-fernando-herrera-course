@@ -1,0 +1,27 @@
+{
+  "name": "nodejs-fernandito-herrera",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Phoebe-WD/nodejs-fernando-herrera-course.git"
+  },
+  "author": "Phoebe Wilckens D.",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Phoebe-WD/nodejs-fernando-herrera-course/issues"
+  },
+  "homepage": "https://github.com/Phoebe-WD/nodejs-fernando-herrera-course#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.21"
+  },
+  "dependencies": {
+    "colors": "^1.4.0",
+    "dotenv": "^16.0.3",
+    "yargs": "^17.7.1"
+  }
+}
