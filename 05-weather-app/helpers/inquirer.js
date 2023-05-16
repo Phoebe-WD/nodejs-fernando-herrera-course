@@ -8,31 +8,15 @@ const menuQuestions = [
     message: "¿Qué deseas hacer?",
     choices: [
       {
-        value: "1",
-        name: `${"1.".magenta} Crear Tarea`,
+        value: 1,
+        name: `${"1.".magenta} Buscar Ciudad`,
       },
       {
-        value: "2",
-        name: `${"2.".magenta} Listar Tareas`,
+        value: 2,
+        name: `${"2.".magenta} Historial`,
       },
       {
-        value: "3",
-        name: `${"3.".magenta} Listar Tareas Completadas`,
-      },
-      {
-        value: "4",
-        name: `${"4.".magenta} Listar Tareas Pendientes`,
-      },
-      {
-        value: "5",
-        name: `${"5.".magenta} Completar Tarea(s)`,
-      },
-      {
-        value: "6",
-        name: `${"6.".magenta} Borrar Tarea`,
-      },
-      {
-        value: "0",
+        value: 0,
         name: `${"0.".magenta} Salir`,
       },
     ],
@@ -78,12 +62,12 @@ const leerInput = async (message) => {
   return desc;
 };
 
-const listadoTareasBorrar = async (tareas = []) => {
-  const choices = tareas.map((tarea, index) => {
+const listarLugares = async (lugares = []) => {
+  const choices = lugares.map((lugar, index) => {
     const idx = `${index + 1}`.magenta;
     return {
-      value: tarea.id,
-      name: `${idx} ${tarea.desc}`,
+      value: lugar.id,
+      name: `${idx} ${lugar.nombre}`,
     };
   });
   choices.unshift({
@@ -94,16 +78,12 @@ const listadoTareasBorrar = async (tareas = []) => {
     {
       type: "list",
       name: "id",
-      message: "Borrar",
+      message: "Seleccione el lugar:",
       choices,
     },
   ];
   const { id } = await inquirer.prompt(questions);
   return id;
-  //   {
-  //   value: tarea.id,
-  //   name: `${"1.".magenta} Crear Tarea`,
-  // },
 };
 
 const confirmar = async (message) => {
@@ -141,7 +121,7 @@ export {
   inquirerMenu,
   pausa,
   leerInput,
-  listadoTareasBorrar,
+  listarLugares,
   confirmar,
   mostrarListadoChecklist,
 };
