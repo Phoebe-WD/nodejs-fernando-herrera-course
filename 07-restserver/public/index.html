@@ -4,9 +4,56 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Access Denied</title>
+    <title>Google Sign In</title>
   </head>
   <body>
-    <h1>Acceso denegado</h1>
+    <h1>Google Sign In</h1>
+    <div
+      id="g_id_onload"
+      data-client_id="712485896463-jl8ffmd9qopvibdrhmrn9dg606e5cnqi.apps.googleusercontent.com"
+      data-callback="handleCredentialResponse"
+      data-auto_prompt="false"
+    ></div>
+    <div
+      class="g_id_signin"
+      data-type="standard"
+      data-size="large"
+      data-theme="outline"
+      data-text="sign_in_with"
+      data-shape="rectangular"
+      data-logo_alignment="left"
+    ></div>
+
+    <button id="google-signout" onclick="signOut()">Sign Out</button>
+
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script>
+      function handleCredentialResponse(response) {
+        const body = { id_token: response.credential };
+
+        fetch("http://localhost:5000/api/auth/google", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(body),
+        })
+          .then((res) => res.json())
+          .then((res) => {
+            console.log(res);
+            localStorage.setItem("email", res.usuario.correo);
+          })
+          .catch(console.warn);
+      }
+      const signout = document.getElementById("google-signout");
+      const signOut = () => {
+        google.accounts.id.disableAutoSelect();
+        google.accounts.id.revoke(localStorage.getItem("email"), (done) => {
+          localStorage.clear();
+          location.reload();
+        });
+        console.log(google.accounts.id);
+      };
+    </script>
   </body>
 </html>
